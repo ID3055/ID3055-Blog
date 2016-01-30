@@ -1,0 +1,28 @@
+﻿$(function(){ 
+  $(".nav-main li").hover(function(){
+    /*下拉框出现*/
+    $("ul",this).slideDown(300)
+  },function(){
+    /*下拉框消失*/
+    $("ul",this).hide();
+    });
+}); 
+$(function(){ 
+  $(".i_user").hover(function(){
+    /*下拉框出现*/
+    $("img",this).animate({top:'12px',
+                            width:'66px',
+                            height:'66px',
+                            left:'-13px',
+                            },'200');
+    $(".i_menu",this).slideDown(500);
+  },function(){
+    /*下拉框消失*/
+    $("img",this).animate({top:'0px',
+                            width:'40px',
+                            height:'40px',
+                            left:'0px',
+                            },'200');
+    $(".i_menu",this).hide();
+    });
+}); 

@@ -1,0 +1,106 @@
+<html>
+
+<head>
+{% block head %}
+
+<link rel="stylesheet" href="{{ url_for('static',filename='css/base.css') }}" type="text/css" media="screen,projection" />
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+</head>
+
+<body>
+{% block body %}
+{% block header %}
+<div class="z_top_container">
+<div class="z_top">
+	<div class="z_top-mask"></div>
+	<div class="z_header">
+        <!--顶部导航左-->
+		<div class="z_top_nav">
+		<ul class="menu">
+			<li class="u-i"><a class="i-link" href="/"><span>首页</span></a></li>
+		</ul>
+		</div>
+
+        <!--顶部导航右-->
+		<div class="uns_box">
+            <ul class="menu">
+                {% if current_user.is_authenticated %}
+                <li class="u-i i_user">
+                    <a href="{{ url_for('main.user', username=current_user.username) }}" target="_blank">
+                        <img class="i_face" src="{{ url_for('static', filename='tou.jpg') }}" width="40px" height="40px">
+                    </a>
+                    <div class="i_menu">
+                        <a href="{{ url_for('auth.change_password') }}">Change Password</a>
+                        <a href="{{ url_for('auth.logout') }}">Log Out</a>
+                    </div>
+                </li>
+                <li class="u-i">
+                    <a class="i-link" href="{{ url_for('main.user', username=current_user.username) }}">消息</a>
+                </li>
+                <li class="u-i">
+                    <a class="i-link" href="{{ url_for('main.user', username=current_user.username) }}">动态</a>
+                </li>
+                {% else %}
+                <li class="u-i"><a class="i-link" href="{{ url_for('auth.login') }}">登陆</a></li>
+                {% endif %}
+            </ul>
+        </div>
+	</div>
+</div>
+</div>
+<div class='header' style='background-image: url("{{ url_for('static',filename='3.jpg') }}");' >
+<div class='header-layer' >
+	<div class="h-center"></div>
+	<div class="menu">
+		<div class="menu-wrapper">
+		<!--nav-->
+    	<nav>
+        <!--导航条-->
+        <ul class="nav-main">
+            <li><a href="/"><em class='nav-main'>首页</em></a>
+            </li>
+            
+            <li><a href="#"><em class='nav-main'>归档</em></a>
+            <div class="num"><span>111</span></div>
+                <ul class="hidden-box">
+                    <a href="/"><li>动画</li></a>
+                    <li>动画</li>
+                    <li>动画</li>
+                </ul>
+            </li>
+
+            <li><a href="#"><em class='nav-main'>关于</em></a>
+            <div class="num"><span>111</span></div>
+                <ul class="hidden-box">
+                    <li>电影</li>
+                    <li>电影</li>
+                    <li>电影</li>
+                </ul>
+            </li>
+        </ul>
+    	</nav>
+		</div>
+	</div>
+</div>
+</div>
+{% endblock %}
+
+<div class='page_content'>
+<div class='page_content-layer'>
+<div class='page_content-center'>
+{% block page_content %}
+
+{% endblock %}
+</div>
+</div>
+</div>
+
+{% endblock %}
+</body>
+<script src="{{ url_for('static', filename='js/jquery-2.1.4.min.js') }}"></script>
+<script src="{{ url_for('static',filename='js/main.js') }}"></script>
+{{ moment.include_moment() }}
+</html>
