@@ -1,35 +1,33 @@
-<html>
+{% extends "bootstrap/base.html" %}
 
-<head>
+{% block title %}Flasky{% endblock %}
+
 {% block head %}
-
+{{ super() }}
 <link rel="stylesheet" href="{{ url_for('static',filename='css/base.css') }}" type="text/css" media="screen,projection" />
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
 {% endblock %}
-</head>
 
-<body>
-{% block body %}
-{% block header %}
+{% block navbar %}
 <div class="z_top_container">
 <div class="z_top">
-	<div class="z_top-mask"></div>
-	<div class="z_header">
+    <div class="z_top-mask"></div>
+    <div class="z_header">
         <!--顶部导航左-->
-		<div class="z_top_nav">
-		<ul class="menu">
-			<li class="u-i"><a class="i-link" href="/"><span>首页</span></a></li>
-		</ul>
-		</div>
+        <div class="z_top_nav">
+        <ul class="menu">
+            <li class="u-i"><a class="i-link" href="/"><span>首页</span></a></li>
+        </ul>
+        </div>
 
         <!--顶部导航右-->
-		<div class="uns_box">
+        <div class="uns_box">
             <ul class="menu">
                 {% if current_user.is_authenticated %}
                 <li class="u-i i_user">
-                    <a href="{{ url_for('main.user', username=current_user.username) }}" target="_blank">
+                    <a href="{{ url_for('main.user', username=current_user.username) }}">
                         <img class="i_face" src="{{ url_for('static', filename='tou.jpg') }}" width="40px" height="40px">
                     </a>
                     <div class="i_menu">
@@ -48,16 +46,16 @@
                 {% endif %}
             </ul>
         </div>
-	</div>
+    </div>
 </div>
 </div>
 <div class='header' style='background-image: url("{{ url_for('static',filename='3.jpg') }}");' >
 <div class='header-layer' >
-	<div class="h-center"></div>
-	<div class="menu">
-		<div class="menu-wrapper">
-		<!--nav-->
-    	<nav>
+    <div class="h-center"></div>
+    <div class="menu">
+        <div class="menu-wrapper">
+        <!--nav-->
+        <nav>
         <!--导航条-->
         <ul class="nav-main">
             <li><a href="/"><em class='nav-main'>首页</em></a>
@@ -81,26 +79,31 @@
                 </ul>
             </li>
         </ul>
-    	</nav>
-		</div>
-	</div>
+        </nav>
+        </div>
+    </div>
 </div>
 </div>
 {% endblock %}
 
-<div class='page_content'>
-<div class='page_content-layer'>
-<div class='page_content-center'>
-{% block page_content %}
+{% block content %}
+<div class="container" style="width:980px;">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
+    {% endfor %}
 
-{% endblock %}
-</div>
-</div>
-</div>
+    {% block page_content %}
 
+    {% endblock %}
+</div>
 {% endblock %}
-</body>
+
+{% block scripts %}
+{{ super() }}
 <script src="{{ url_for('static', filename='js/jquery-2.1.4.min.js') }}"></script>
 <script src="{{ url_for('static',filename='js/main.js') }}"></script>
 {{ moment.include_moment() }}
-</html>
+{% endblock %}

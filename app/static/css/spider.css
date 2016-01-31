@@ -1,0 +1,15 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+.buttom1 {width:100%;height:8%;margin : 0 auto;}
+.buttom2 {width:100%;line-height:42px;height:42;overflow: hidden;text-align:center;background-color: #FFFFFF ;color:#5f605a;margin : 3% 0px 8% 0px;}
+
+
+.page1{width:22px;line-height:36px;height:36px;background-color: #FFFFFF ;color:#5f605a;float: left;margin-left:5px;text-align:center}
+.page2{width:22px;line-height:36px;height:36px;background-color: #9d8c7a ;color:#FFFFFF;float: left;margin-left:5px;text-align:center}
+.page3{width:22px;line-height:36px;height:36px;float: left;margin-left:5px;text-align:center}
+a:link,a:visited,a:hover,a:active{
+	color: #000000;
+	text-decoration: none;
+}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Flasky{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/spider.css') }}" type="text/css" media="screen,projection" />
+{% endblock %}
+{% block page_content %}
+<ul class="posts">
+    {% for i,j in imglist2 %}
+    <li class="post">
+        <div class="post-thumbnail">
+            <a href="{{ url_for('main.user', username=current_user.username) }}">
+                <img class="img-rounded profile-thumbnail" src="{{ url_for('static', filename='tou.jpg') }}" width="40" height="40">
+            </a>
+        </div>
+        <div class="post-content">
+            <div class="post-author"><a href="{{ url_for('main.user', username=current_user.username) }}">{{ current_user.username }}</a></div>
+            <div class="post-body"><p>{{ i }}</p><img src= {{ j }} /></div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+<div class="buttom1">  
+{% if page_id>=5 %}    
+    <div class='page3'>第</div>
+    <a href=1 ><div class='page1' >1</div></a>
+    <div class='page3'>...</div>
+    {% for t in range(page_id-2,page_id+3) %} 
+        {% if page_id==t %}
+            <div class='page2' >{{ t }}</div>
+        {% else %}
+            <a href={{ t }} ><div class='page1' >{{ t }}</div></a>
+        {% endif %}
+    {% endfor %}
+    <div class='page3'>页</div>
+{% else %}
+    <div class='page3'>第</div>
+    {% for t in range(1,6) %} 
+        {% if page_id==t %}
+            <div class='page2' >{{ t }}</div>
+        {% else %}
+            <a href={{ t }} ><div class='page1' >{{ t }}</div></a>
+        {% endif %}
+    {% endfor %}
+    <div class='page3'>页</div>
+{% endif %}
+</div>
+
+{% endblock %}

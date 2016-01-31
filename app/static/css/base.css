@@ -10,6 +10,7 @@ font-family: "Microsoft YaHei",Arial,Helvetica,sans-serifsans-serif;
     -webkit-margin-end: 0px;
     -webkit-padding-start: 0px;
 }
+*{margin:0;padding:0;}
 ul{
     display: block;
     list-style-type: disc;
@@ -19,6 +20,7 @@ ul{
     -webkit-margin-end: 0px;
     -webkit-padding-start: 0px;
 }
+li{list-style-type:none;}  
 a{outline:none;}/*掉链接周围的虚线框*/
 a:link,a:visited,a:hover,a:active {
     /*text-decoration: none;*/
@@ -84,6 +86,11 @@ z-index: 10;
     height: 42px;
     line-height: 42px;
     font-size: 12px;
+}
+.z_top_nav ul.menu {
+    float: left;
+    position: relative;
+    /*line-height: 42px;*/
 }
 .z_top_nav li.u-i {
     float: left;

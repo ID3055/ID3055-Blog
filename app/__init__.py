@@ -32,5 +32,8 @@ def create_app(config_name):
 	from .auth import auth as auth_blueprint
 	app.register_blueprint(auth_blueprint,url_prefix='/auth')
 
+	from .spider import spider as spider_blueprint
+	app.register_blueprint(spider_blueprint,url_prefix='/spider')
+
 	return app
 
