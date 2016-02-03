@@ -28,11 +28,14 @@
                 {% if current_user.is_authenticated %}
                 <li class="u-i i_user">
                     <a href="{{ url_for('main.user', username=current_user.username) }}">
-                        <img class="i_face" src="{{ url_for('static', filename='tou.jpg') }}" width="40px" height="40px">
+                        <img class="i_face" src="{{ current_user.getavatar() }}" width="40px" height="40px">
                     </a>
                     <div class="i_menu">
                         <a href="{{ url_for('auth.change_password') }}">Change Password</a>
                         <a href="{{ url_for('auth.logout') }}">Log Out</a>
+                        {% if current_user.can(Permission.MODERATE_COMMENTS) %}
+                        <a href="{{ url_for('main.moderate') }}">Moderate Comments</a>
+                        {% endif %}
                     </div>
                 </li>
                 <li class="u-i">
@@ -58,11 +61,11 @@
         <nav>
         <!--导航条-->
         <ul class="nav-main">
-            <li><a href="/"><em class='nav-main'>首页</em></a>
+            <li><a href="/"><em>首页</em></a>
             </li>
             
-            <li><a href="#"><em class='nav-main'>归档</em></a>
-            <div class="num"><span>111</span></div>
+            <li><a href="#"><em>碎碎念</em>
+            <div class="num"><span>111</span></div></a>
                 <ul class="hidden-box">
                     <a href="/"><li>动画</li></a>
                     <li>动画</li>
@@ -70,8 +73,8 @@
                 </ul>
             </li>
 
-            <li><a href="#"><em class='nav-main'>关于</em></a>
-            <div class="num"><span>111</span></div>
+            <li><a href="#"><em>关于</em>
+            <div class="num"><span>111</span></div></a>
                 <ul class="hidden-box">
                     <li>电影</li>
                     <li>电影</li>
@@ -94,10 +97,21 @@
         {{ message }}
     </div>
     {% endfor %}
+    
+    <div class="row">
+        <div class="span-left" style="width:900px;">
+        {% block page_content %}
 
-    {% block page_content %}
+        {% endblock %}
+        </div>
 
-    {% endblock %}
+        <div class="span-right" style="width:80px;">
+        {% block page_content2 %}
+        <p>right</p>
+        {% endblock %}
+        </div>
+    </div>
+    
 </div>
 {% endblock %}
 

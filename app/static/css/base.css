@@ -1,9 +1,9 @@
 html,body { 
-margin:0px;
-padding: 0px; 
-width:100%;
-height:100%;
-font-family: "Microsoft YaHei",Arial,Helvetica,sans-serifsans-serif;
+    margin:0px;
+    padding: 0px; 
+    width:100%;
+    height:100%;
+    font-family: "Microsoft YaHei",Arial,Helvetica,sans-serifsans-serif;
     -webkit-margin-before: 0em;
     -webkit-margin-after: 0em;
     -webkit-margin-start: 0px;
@@ -22,22 +22,19 @@ ul{
 }
 li{list-style-type:none;}  
 a{outline:none;}/*掉链接周围的虚线框*/
-a:link,a:visited,a:hover,a:active {
-    /*text-decoration: none;*/
-    /*color: #000000;*/
-}
+
 /*顶部*/
 .header {
-background: none no-repeat scroll center -10px transparent;
-position: relative;
-margin: -42px auto 0px;
+    background: none no-repeat scroll center -10px transparent;
+    position: relative;
+    margin: -42px auto 0px;
 }
 .header .header-layer{
-position: relative;
-top: 0px;
-left: 0px;
-width: 100%;
-z-index: 10;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 10;
 }
 .header .h-center {
     width: 980px;
@@ -176,12 +173,6 @@ z-index: 10;
     position: relative;
 }
 
-/*顶部导航用户头像*/
-
-
-/*用户面板隐藏盒子*/
-
-
 .header .menu{
 width: 100%;
 background: none repeat scroll 0% 0% #FFF;
@@ -219,7 +210,6 @@ nav{
 }
 /*导航条设置*/
 .nav-main>li{
-    width: 56px;
     display: block;
     float: left;
     background: #fff;
@@ -233,16 +223,46 @@ nav{
 .nav-main>li a:hover{
     color: #00a1d6;
 }
-.nav-main>li a:link,a:visited,a:active {
+.nav-main li a:link,.nav-main li a:visited,.nav-main li a:active {
     text-decoration: none;
     color: #000000;
 }
 .nav-main em{
     position: relative;
     vertical-align: middle;
-    top:23px;
     font-style: normal;
     font-weight: normal;
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    margin: 0 14px;
+    padding-top: 8px;
+}
+
+/*导航栏粉色数字框*/
+.num{
+    position: absolute;
+    top: 8px;
+    left: 0px;
+    height: 14px;
+    width: 100%;
+    text-align: center;
+}
+.num span{
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    margin-left: -12px;
+    color: #fff;
+    border-radius: 4px;
+    height: 12px;
+    line-height: 12px;
+    text-align: center;
+    font-family: Calibri,Arial,Helvetica,sans-serifsans-serif;
+    background-color: #ffafc9;
+    font-size: 11px;
+    min-width: 18px;
+    padding: 1px 3px;
 }
 
 /*导航栏隐藏盒子*/
@@ -270,52 +290,4 @@ nav{
 }
 .hidden-box li:hover{
     background: rgb(229,233,239);
-}
-
-/*导航栏粉色数字框*/
-.num{
-    position: relative;
-    top: -11px;
-    left: 0;
-    height: 14px;
-    width: 100%;
-    text-align: center;
-}
-.num span{
-    position: absolute;
-    top: 0px;
-    left: 50%;
-    margin-left: -12px;
-    color: #fff;
-    border-radius: 4px;
-    height: 12px;
-    line-height: 12px;
-    text-align: center;
-    font-family: Calibri,Arial,Helvetica,sans-serifsans-serif;
-    background-color: #ffafc9;
-    font-size: 11px;
-    min-width: 18px;
-    padding: 1px 3px;
-}
-
-/*页面主体部分*/
-.page_content{
-position: relative;
--webkit-margin-before: 0em;
-    -webkit-margin-after: 0em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
-    -webkit-padding-start: 0px;
-}
-.page_content .page_content-layer{
-position: relative;
-top: 0px;
-left: 0px;
-width: 100%;
-}
-.page_content .page_content-center {
-    width: 980px;
-    margin: 0px auto;
-    position: relative;
-    transition: height 0.2s ease 0s;
 }

@@ -5,7 +5,7 @@
 {% block page_content %}
 
 <div class="page-header">
-    <img class="img-rounded profile-thumbnail" style="location:relative;" src="{{ url_for('static', filename='tou.jpg') }}" width="256" height="256">
+    <img class="img-rounded profile-thumbnail" style="location:relative;" src="{{ user.getavatar() }}" width="256" height="256">
     <div class="profile-header">
         <h1>{{ user.username }}</h1>
         {% if user.name or user.location %}
@@ -25,6 +25,9 @@
         {% if user == current_user %}
             <a class="btn btn-default" href="{{ url_for('.edit_profile') }}">
             Edit Profile
+            </a>
+            <a class="btn btn-default" href="{{ url_for('.edit_avatar') }}">
+            Edit Avatar
             </a>
         {% endif %}
         {% if current_user.is_administrator() %}
