@@ -67,6 +67,7 @@ class User(UserMixin,db.Model):
 	avatar_hash = db.Column(db.String(32))#头像hash
 
 	posts = db.relationship('Post', backref='author', lazy='dynamic')#文章
+	status = db.relationship('Statue', backref='author', lazy='dynamic')#状态
 	comments = db.relationship('Comment',backref='author',lazy='dynamic')
 	def __init__(self,**kwargs):
 		super(User,self).__init__(**kwargs)
@@ -171,13 +172,14 @@ class AnnoymousUser(AnonymousUserMixin):#匿名用户
 class Post(db.Model):
 	__tablename__ = 'posts'
 	id = db.Column(db.Integer, primary_key=True)
+	title = db.Column(db.Text)
 	body = db.Column(db.Text)
 	body_html = db.Column(db.Text)
 	timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 	author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 	comments = db.relationship('Comment',backref='post',lazy='dynamic')
 	@staticmethod
-	def on_change_body(target,value,oldvalue,initiator):
+	def on_changed_body(target,value,oldvalue,initiator):
 		allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
 						'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
 						'h1', 'h2', 'h3', 'p','br']
@@ -194,18 +196,44 @@ class Post(db.Model):
 		user_count = User.query.count()
 		for i in range(count):
 			u = User.query.offset(randint(0, user_count - 1)).first()
-			p = Post(body=forgery_py.lorem_ipsum.sentences(randint(1, 3)),
+			p = Post(title=forgery_py.lorem_ipsum.title(),
+					body=forgery_py.lorem_ipsum.sentences(randint(1, 3)),
 					timestamp=forgery_py.date.date(True),
 					author=u)
 			db.session.add(p)
 			db.session.commit()
+class Statue(db.Model):
+	__tablename__ = 'statues'
+	id = db.Column(db.Integer, primary_key=True)
+	body = db.Column(db.Text)
+	body_html = db.Column(db.Text)
+	timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+	author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+	@staticmethod
+	def on_changed_body(target,value,oldvalue,initiator):
+		allowed_tags = ['a', 'abbr', 'acronym', 'b', 'code', 'em', 'i',
+						'strong']
+		target.body_html = bleach.linkify(bleach.clean(
+			markdown(value,output_format='html'),
+			tags=allowed_tags,strip=True))
 
-login_manager.anonymous_user = AnnoymousUser
+	@staticmethod
+	def generate_fake(count=100):
+		from random import seed,randint
+		import forgery_py
 
-#flask-login加载用户的回调函数
-@login_manager.user_loader
-def load_user(user_id):
-	return User.query.get(int(user_id))
+		seed()
+		user_count = User.query.count()
+		for i in range(count):
+			u = User.query.offset(randint(0, user_count - 1)).first()
+			s = Status(body=forgery_py.lorem_ipsum.sentences(randint(1, 3)),
+					timestamp=forgery_py.date.date(True),
+					author=u)
+			db.session.add(s)
+			db.session.commit()
+
+
+
 
 class Comment(db.Model):
 	__tablename__ = 'comments'
@@ -225,5 +253,14 @@ class Comment(db.Model):
 			markdown(value, output_format='html'),
 			tags=allowed_tags, strip=True))
 
-db.event.listen(Post.body,'set',Post.on_change_body)
+db.event.listen(Post.body,'set',Post.on_changed_body)
+db.event.listen(Statue.body,'set',Statue.on_changed_body)
 db.event.listen(Comment.body, 'set', Comment.on_changed_body)
+
+
+login_manager.anonymous_user = AnnoymousUser
+#flask-login加载用户的回调函数
+@login_manager.user_loader
+def load_user(user_id):
+	return User.query.get(int(user_id))
+

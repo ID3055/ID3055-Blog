@@ -12,6 +12,7 @@ class NameForm(Form):
     submit = SubmitField('Submit')
 
 class PostForm(Form):
+	title = StringField('title', validators=[Required()])
 	body = PageDownField("write something",validators=[Required()])
 	submit = SubmitField('submit')
 

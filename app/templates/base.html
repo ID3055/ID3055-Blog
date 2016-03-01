@@ -13,7 +13,10 @@
 {% block navbar %}
 <div class="z_top_container">
 <div class="z_top">
-    <div class="z_top-mask"></div>
+    <div class="z_top-mask-wrp">
+        <div class="z_top-mask-bg" style="background-image: url('{{ url_for('static',filename='3.jpg') }}');"></div>
+        <div class="z_top-mask"></div>
+    </div>
     <div class="z_header">
         <!--顶部导航左-->
         <div class="z_top_nav">
@@ -61,24 +64,24 @@
         <nav>
         <!--导航条-->
         <ul class="nav-main">
-            <li><a href="/"><em>首页</em></a>
+            <li><a href="/"><em class="home">首页</em></a>
             </li>
             
             <li><a href="#"><em>碎碎念</em>
             <div class="num"><span>111</span></div></a>
                 <ul class="hidden-box">
-                    <a href="/"><li>动画</li></a>
-                    <li>动画</li>
-                    <li>动画</li>
+                <a href="/"><li>动画</li></a>
+                <li>动画</li>
+                <li>动画</li>
                 </ul>
             </li>
 
             <li><a href="#"><em>关于</em>
             <div class="num"><span>111</span></div></a>
                 <ul class="hidden-box">
-                    <li>电影</li>
-                    <li>电影</li>
-                    <li>电影</li>
+                <li>电影</li>
+                <li>电影</li>
+                <li>电影</li>
                 </ul>
             </li>
         </ul>
@@ -98,18 +101,18 @@
     </div>
     {% endfor %}
     
-    <div class="row">
-        <div class="span-left" style="width:900px;">
+    <div class="aaa">
+        <div class="left">
         {% block page_content %}
 
         {% endblock %}
         </div>
 
-        <div class="span-right" style="width:80px;">
-        {% block page_content2 %}
-        <p>right</p>
+        <aside class="right">
+        {% block aside %}
+        <div class="right-weibo"><iframe width="240" height="500" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=240&height=530&fansRow=1&ptype=1&speed=0&skin=5&isTitle=1&noborder=0&isWeibo=1&isFans=0&uid=1758905863&verifier=eb816cbb&dpc=1"></iframe></div>
         {% endblock %}
-        </div>
+        </aside>
     </div>
     
 </div>
