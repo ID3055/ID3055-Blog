@@ -1,0 +1,231 @@
+{% extends "base.html" %}
+
+{% block title %}Flasky{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/base.css') }}" media="screen,projection" />
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block navbar %}
+<div class="bili-header-m">
+	<div class="nav-menu">
+		<div class="nav-menu">
+			<div class="blur-bg" style="background-image: url('{{ url_for('static',filename='1.jpg') }}');"></div>
+			<div class="nav-mask"></div>
+			<div class="bili-wrapper clearfix">
+				<div class="nav-con fl">
+					<ul>
+						<li class="nav-item home"><a href="//www.bilibili.com" title="主站" class="t"><i class="bili-icon"></i>主站</a>	</li> 
+						<li class="nav-item hbili">	<a href="http://h.bilibili.com" target="_blank" title="画友" class="t">画友</a></li> 
+						<li class="nav-item game"><a href="//game.bilibili.com" target="_blank" title="游戏中心" class="t">游戏中心</a></li> 
+						<li class="nav-item live"><a href="//live.bilibili.com" target="_blank" title="直播" class="t">直播</a></li> 
+						<li class="nav-item buy"><a href="//show.bilibili.com/platform/home.html" target="_blank" title="会员购" class="t">会员购</a></li> 
+						<li class="nav-item zb"><a href="//bmall.bilibili.com" target="_blank" title="周边" class="t">周边</a></li> 
+						<li class="nav-item mobile"><a href="//app.bilibili.com" target="_blank" title="移动端" class="t">移动端</a></li>
+					</ul>
+				</div>
+				<div class="nav-con fr">
+					<ul class="fr">
+						{% if current_user.is_authenticated %}
+						<li class="nav-item profile-info">
+							<a href="{{ url_for('main.user', username=current_user.username) }}" target="_blank" class="t">
+								<div class="i-face">
+									<img src="{{ url_for('static', filename='tou2.jpg') }}" class="face" /> 
+									<img class="pendant" /> <!---->
+								</div>
+							</a>
+							<!--隐藏的详情页面-->
+							<div class="profile-m dd-bubble">
+								<div class="u-info">
+									<div class="uname"><b class="">满塘都是我的鱼</b> <!----></div>
+									<div class="i_menu">
+										<a href="{{ url_for('auth.change_password') }}">Change Password</a>
+										<a href="{{ url_for('auth.logout') }}">Log Out</a>
+										{% if current_user.can(Permission.MODERATE_COMMENTS) %}
+										<a href="{{ url_for('main.moderate') }}">Moderate Comments</a>
+										{% endif %}
+									</div>
+								</div>
+							</div>
+						</li> 
+						<li class="nav-item"><a href="//message.bilibili.com" target="_blank" title="消息" class="t"><div class="num">3</div>消息</a><!----></li> 
+						<li class="nav-item"><a href="//t.bilibili.com" target="_blank" class="t"><div class="num">4</div>动态</a> <!----></li> 
+						<li class="nav-item"><a href="//www.bilibili.com/watchlater/#/list" target="_blank" class="t">稍后再看</a> <!----></li> 
+						<li class="nav-item"><a href="//space.bilibili.com/2939135/#!/favlist" target="_blank" class="t">收藏夹</a> <!----></li> 
+						<li class="nav-item"><a href="//www.bilibili.com/account/history" target="_blank" class="t">历史</a> <!----></li>
+						{% else %}
+						<li class="nav-item"><a class="t" href="{{ url_for('auth.login') }}">登陆</a></li>
+						{% endif %}
+					</ul> <!---->
+				</div>
+			</div>
+		
+
+		</div>
+	</div>
+	<div id="banner_link" class="head-banner report-wrap-module report-scroll-module" style="background-image: url({{ url_for('static',filename='1.jpg') }});">
+		<div class="head-content bili-wrapper">
+			<p class="head-title">你想看的都在这里~</p>
+			<div class="search">
+				<form class="searchform">
+					<input type="text" autocomplete="off" accesskey="s" x-webkit-speech="" x-webkit-grammar="builtin:translate" placeholder="你知道么？" value="" class="search-keyword">
+					<button type="submit" class="search-submit"></button>
+				</form><!---->
+				<a href="//www.bilibili.com/ranking" target="_blank" class="link-ranking"><span>排行榜</span></a>
+			</div>
+			<a href="//www.bilibili.com" class="head-logo" style="background-image: url({{ url_for('static',filename='logo.png') }});"></a>
+		</div>
+		<a href="//www.bilibili.com/blackboard/activity-HkLExEcMG.html" target="_blank" class="banner-link"></a>
+	</div>
+	<div class="bili-wrapper">
+		<div id="primary-menu" class="primary-menu">
+			<ul class="nav-menu">
+				<li class="nav-item home"><a href="/" class="nav-link"><div class="nav-name">首页</div></a>
+				</li>
+				
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<div class="num-wrap"><span class="num">111</span></div>
+						<div class="nav-name">动画</div>
+					</a>
+					
+					<ul class="sub-nav">
+						<li class="sub-nav-item">
+							<a href="/" class="sub-nav-link">
+								<span>
+									MAD.AMV
+									<i class="arrow"></i>
+								</span>
+							</a>
+						</li>
+						<li class="sub-nav-item">
+							<a href="/" class="sub-nav-link">
+								<span>
+									MAD.AMV
+									<i class="arrow"></i>
+								</span>
+							</a>
+						</li>
+						<li class="sub-nav-item">
+							<a href="/" class="sub-nav-link">
+								<span>
+									MAD.AMV
+									<i class="arrow"></i>
+								</span>
+							</a>
+						</li>
+					</ul>
+					
+				</li>
+
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<div class="num-wrap"><span class="num">111</span></div>
+						<div class="nav-name">动画</div>
+					</a>
+					
+					<ul class="sub-nav">
+						<li class="sub-nav-item">
+							<a href="/" class="sub-nav-link">
+								<span>
+									MAD.AMV
+									<i class="arrow"></i>
+								</span>
+							</a>
+						</li>
+						<li class="sub-nav-item">
+							<a href="/" class="sub-nav-link">
+								<span>
+									MAD.AMV
+									<i class="arrow"></i>
+								</span>
+							</a>
+						</li>
+						<li class="sub-nav-item">
+							<a href="/" class="sub-nav-link">
+								<span>
+									MAD.AMV
+									<i class="arrow"></i>
+								</span>
+							</a>
+						</li>
+					</ul>
+					
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<div class="num-wrap"><span class="num">111</span></div>
+						<div class="nav-name">动画</div>
+					</a>
+					
+					<ul class="sub-nav">
+						<li class="sub-nav-item">
+							<a href="/" class="sub-nav-link">
+								<span>
+									MAD.AMV
+									<i class="arrow"></i>
+								</span>
+							</a>
+						</li>
+						<li class="sub-nav-item">
+							<a href="/" class="sub-nav-link">
+								<span>
+									MAD.AMV
+									<i class="arrow"></i>
+								</span>
+							</a>
+						</li>
+						<li class="sub-nav-item">
+							<a href="/" class="sub-nav-link">
+								<span>
+									MAD.AMV
+									<i class="arrow"></i>
+								</span>
+							</a>
+						</li>
+					</ul>
+					
+				</li>
+				
+			</ul>		
+		</div>
+	</div>
+</div>
+</div>
+</div>
+{% endblock %}
+{% block content %}
+<div class="bili-wrapper">
+	{% for message in get_flashed_messages() %}
+	<div class="alert alert-warning">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		{{ message }}
+	</div>
+	{% endfor %}
+	
+	<div class="aaa">
+		<div class="left">
+		{% block page_content %}
+
+		{% endblock %}
+		</div>
+
+		<aside class="right">
+		{% block aside %}
+		<div class="right-weibo"><iframe width="240" height="500" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=240&height=530&fansRow=1&ptype=1&speed=0&skin=5&isTitle=1&noborder=0&isWeibo=1&isFans=0&uid=1758905863&verifier=eb816cbb&dpc=1"></iframe></div>
+		{% endblock %}
+		</aside>
+	</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/jquery-2.1.4.min.js') }}"></script>
+<script src="{{ url_for('static',filename='js/main.js') }}"></script>
+{{ moment.include_moment() }}
+{% endblock %}
