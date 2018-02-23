@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Flasky{% endblock %}
+{% block head %}
+{{ super() }}
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='css/spider.css') }}" type="text/css" media="screen,projection" />
+{% endblock %}
+{% block content %}
+<div class=".bili-content-wrapper clearfix">
+	{% include 'spider/content.html' %}
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}Flasky{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/spider.css') }}" type="text/css" media="screen,projection" />
+{% endblock %}
+{% block wrapper %}
+<div class=".bili-content-wrapper clearfix">
+	<div class="wiki-aside clearfix">
+		<p><strong>站点</strong></p>
+		<ul>
+			<li><a href="/spider/qiubai/1">QiuBai</a></li>
+			<li><a href="/spider/qiubaiwep/1">手机</a></li>
+		</ul>
+	</div>
+	<div class="wiki-content clearfix">
+		{% include 'spider/content.html' %}
+	</div>
+</div>
+{% endblock %}

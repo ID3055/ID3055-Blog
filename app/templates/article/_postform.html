@@ -1,0 +1,31 @@
+<script type="text/javascript" src="{{ url_for('static',filename='js/wangeditor/wangEditor.js') }}"></script>
+<div class="post-article">
+	<form method="POST">
+		<div class="cover-img">
+			
+		</div>
+		{{ form.csrf_token }}
+		<h1>标题*</h1>
+		{{ form.title(class="title-form") }}
+		{{ form.body(id="editor2",class="RichTextEditor") }} 
+		<div id="editor">
+			<p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
+		</div>
+		{{ form.submit(class="submit") }} 
+	</form>
+</div>
+<!--wangeditor V3版本后不支持使用textarea。在此用onchang方法同步内容-->
+<script type="text/javascript">
+	var E = window.wangEditor
+	var editor = new E('#editor')
+	var $text1 = $('#editor2')
+	editor.customConfig.onchange = function (html) {
+		// 监控变化，同步更新到 textarea
+		$text1.val(html)
+	}
+	//窗口zindex值，不设置时默认10000
+	editor.customConfig.zIndex = 1
+	editor.create()
+	// 初始化 textarea 的值
+	$text1.val(editor.txt.html())
+</script>

@@ -1,28 +1,28 @@
 #coding:utf8
-from flask.ext.wtf import Form
+from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms import StringField, TextAreaField, BooleanField, SelectField,\
     SubmitField
 from wtforms.validators import Required, Length, Email, Regexp
 from ..models import Role,User
-from flask.ext.pagedown.fields import PageDownField
+from flask_pagedown.fields import PageDownField
 
-class NameForm(Form):
+class NameForm(FlaskForm):
     name = StringField('What is your name?', validators=[Required()])
     submit = SubmitField('Submit')
 
-class PostForm(Form):
+class PostForm(FlaskForm):
 	title = StringField('title', validators=[Required()])
-	body = PageDownField("write something",validators=[Required()])
+	body = TextAreaField("write something",validators=[Required()])
 	submit = SubmitField('submit')
 
-class EditProfileForm(Form):
+class EditProfileForm(FlaskForm):
 	name = StringField('Real name',validators=[Length(0,64)])
 	location = StringField('Location',validators=[Length(0,64)])
 	about_me = TextAreaField('About me')
 	submit = SubmitField('submit')
 
-class EditAvatarForm(Form):
+class EditAvatarForm(FlaskForm):
 	#avatar = FileField('Your Avatar')
 	avatar = FileField('Your Avatar', validators=[
 		FileRequired(),
@@ -30,7 +30,7 @@ class EditAvatarForm(Form):
 	])
 	submit = SubmitField('submit')
 
-class EditProfileAdminForm(Form):
+class EditProfileAdminForm(FlaskForm):
 	email = StringField('Email',validators=[Required(),Length(1,64),Email()])
 	username = StringField('Username',validators=[
 		Required(),Length(1,64),Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
@@ -58,7 +58,7 @@ class EditProfileAdminForm(Form):
 				User.query.filter_by(username=field.data).first():
 			raise ValidationError('Username already in use.')
 
-class CommentForm(Form):
+class CommentForm(FlaskForm):
 	body = StringField('',validators=[Required()])
 	submit = SubmitField('submit')
 		

@@ -1,15 +1,38 @@
-@charset "utf-8";
-/* CSS Document */
+.wiki-aside{
+	width:220px;
+	display:table-cell;
+}
+.wiki-content{
+	display:table-cell;
+	width:760px;
+}
+.wiki-content{
+    clear: both;
+    background: #fff;
+    color: inherit;
+    border: 1px solid #eee;
+    box-shadow: 0 0 0.5em #999;
+    border-radius: 2px;
+    padding: 1.556em 2em 2em;
+    margin-bottom: .5em;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+.wiki-aside {
+    word-wrap: break-word;
+}
+.wiki-aside a:link, .wiki-aside a:visited {
+    color: #2b73b7;
+    background-color: inherit;
+}
 
-
-.buttom1 {width:100%;height:8%;margin : 0 auto;}
+.buttom1 {font-size:3em;width:100%;height:8%;margin : 0 auto;}
 .buttom2 {width:100%;line-height:42px;height:42;overflow: hidden;text-align:center;background-color: #FFFFFF ;color:#5f605a;margin : 3% 0px 8% 0px;}
 
 
-.page1{width:22px;line-height:36px;height:36px;background-color: #FFFFFF ;color:#5f605a;float: left;margin-left:5px;text-align:center}
-.page2{width:22px;line-height:36px;height:36px;background-color: #9d8c7a ;color:#FFFFFF;float: left;margin-left:5px;text-align:center}
-.page3{width:22px;line-height:36px;height:36px;float: left;margin-left:5px;text-align:center}
-a:link,a:visited,a:hover,a:active{
-	color: #000000;
-	text-decoration: none;
-}
+.page1{width:2em;line-height:2em;height:2em;background-color: #FFFFFF ;color:#5f605a;float: left;margin-left:5px;text-align:center}
+.page2{width:2em;line-height:2em;height:2em;background-color: #9d8c7a ;color:#FFFFFF;float: left;margin-left:5px;text-align:center}
+.page3{width:2em;line-height:2em;height:2em;float: left;margin-left:5px;text-align:center}
+.post-author a{margin-left:42px;}
+.post-content p{margin-left:42px;}
+.post-content img{margin-top:4px;width:90%;}

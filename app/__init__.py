@@ -1,11 +1,11 @@
 from flask import Flask
-from flask.ext.bootstrap import Bootstrap
-from flask.ext.mail import Mail
-from flask.ext.moment import Moment
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_bootstrap import Bootstrap
+from flask_mail import Mail
+from flask_moment import Moment
+from flask_sqlalchemy import SQLAlchemy
 from config import config
-from flask.ext.login import LoginManager
-from flask.ext.pagedown import PageDown
+from flask_login import LoginManager
+from flask_pagedown import PageDown
 
 bootstrap = Bootstrap()
 mail = Mail()
@@ -35,7 +35,10 @@ def create_app(config_name):
 
 	from .auth import auth as auth_blueprint
 	app.register_blueprint(auth_blueprint,url_prefix='/auth')
-
+	
+	from .article import article as article_blueprint
+	app.register_blueprint(article_blueprint,url_prefix='/article')
+	
 	from .spider import spider as spider_blueprint
 	app.register_blueprint(spider_blueprint,url_prefix='/spider')
 

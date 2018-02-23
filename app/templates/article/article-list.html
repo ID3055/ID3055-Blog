@@ -8,7 +8,12 @@
 {% endblock %}
 {% block wrapper %}
 
-
+{% include '_posts.html' %}
+{% if pagination %}
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, 'article.list') }}
+</div>
+{% endif %}
 {% endblock %}
 
 {% block scripts %}

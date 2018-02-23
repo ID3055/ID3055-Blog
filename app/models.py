@@ -1,6 +1,6 @@
 #coding:utf8
 from werkzeug.security import generate_password_hash,check_password_hash
-from flask.ext.login import UserMixin,AnonymousUserMixin
+from flask_login import UserMixin,AnonymousUserMixin
 from . import db
 from .import login_manager
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
@@ -182,7 +182,7 @@ class Post(db.Model):
 	def on_changed_body(target,value,oldvalue,initiator):
 		allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
 						'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
-						'h1', 'h2', 'h3', 'p','br']
+						'h1', 'h2', 'h3', 'p','br','strike']#允许存储的标签，要实现富文本必须先补全这个
 		target.body_html = bleach.linkify(bleach.clean(
 			markdown(value,output_format='html'),
 			tags=allowed_tags,strip=True))
