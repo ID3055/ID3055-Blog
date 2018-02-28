@@ -6,10 +6,12 @@
 
 * 
 
-###requirements
+### requirements
 
 * [requirements.txt](https://github.com/ID3055/ID3055-Blog/blob/master/requirements.txt)
 
-###Test Command
+pip install -r requirements.txt
+
+### Test Command
 
 * python manage.py runserver
