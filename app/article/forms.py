@@ -12,11 +12,11 @@ class NameForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class PostForm(FlaskForm):
-	title = StringField('title', validators=[Required()])
-	body = TextAreaField("write something",validators=[Required()])
-	submit = SubmitField('submit')
+    title = StringField('title', validators=[Required()])
+    body = TextAreaField("write something",validators=[Required()])
+    submit = SubmitField('submit')
 
 class CommentForm(FlaskForm):
-	body = StringField('',validators=[Required()])
-	submit = SubmitField('submit')
-		
+    body = StringField('',validators=[Required()])
+    submit = SubmitField('submit')
+        

@@ -1,4 +1,6 @@
+# coding: utf-8
 #!/usr/bin/env python
+# Author: ID3055
 import os
 
 from flask_migrate import Migrate, MigrateCommand
