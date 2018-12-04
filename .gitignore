@@ -10,6 +10,7 @@ __pycache__/
 data-dev.sqlite
 .sqlite
 .Python
+migrations/
 env/
 /env
 venv/
