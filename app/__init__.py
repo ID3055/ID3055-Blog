@@ -39,8 +39,8 @@ def create_app(config_name):
 	from .article import article as article_blueprint
 	app.register_blueprint(article_blueprint,url_prefix='/article')
 	
-	from .spider import spider as spider_blueprint
-	app.register_blueprint(spider_blueprint,url_prefix='/spider')
+	# from .spider import spider as spider_blueprint
+	# app.register_blueprint(spider_blueprint,url_prefix='/spider')
 
 	return app
 
