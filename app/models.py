@@ -1,23 +1,33 @@
-#coding:utf8
-from werkzeug.security import generate_password_hash,check_password_hash
-from flask_login import UserMixin,AnonymousUserMixin
-from . import db
-from .import login_manager
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from flask import current_app,url_for
+# coding: utf-8
+#!/usr/bin/env python
+# Author: ID3055
+import hashlib
 from datetime import *
-import hashlib,bleach
+
+import bleach
+from flask import current_app, url_for
+from flask_login import AnonymousUserMixin, UserMixin
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from markdown import markdown
+from werkzeug.security import check_password_hash, generate_password_hash
+
+from . import db, login_manager
+
 
 class Permission:
-    FOLLOW = 0x01
-    COMMENT = 0x02
-    WRITE_ARTICLES = 0x04
-    MODERATE_COMMENTS = 0x08
-    ADMINISTER = 0x80
+    '''
+    具体的权限
+    '''
+    FOLLOW = 0x01#关注
+    COMMENT = 0x02#评论
+    WRITE_ARTICLES = 0x04#发表文章
+    MODERATE_COMMENTS = 0x08#管理评论
+    ADMINISTER = 0x80#admin
 
 class Role(db.Model):
+    #定义表名
     __tablename__ = 'roles'
+    #定义列
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), unique=True)
     default = db.Column(db.Boolean,default=False,index=True)
@@ -79,6 +89,9 @@ class User(UserMixin,db.Model):
         if self.email is not None and self.avatar_hash is None:
             self.avatar_hash = hashlib.md5(self.email.encode('utf-8')).hexdigest()
 
+    def __repr__(self):
+        return '<User %r>' % self.username
+
     @property
     def password(self):
         raise AttributeError('password is not a readable attribute')
@@ -90,10 +103,8 @@ class User(UserMixin,db.Model):
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def __repr__(self):
-        return '<User %r>' % self.username
-
     def generate_confirmation_token(self, expiration=3600):
+        # 将{'confirm': self.id}加密生成token
         s = Serializer(current_app.config['SECRET_KEY'], expiration)
         return s.dumps({'confirm': self.id})
 
@@ -124,10 +135,12 @@ class User(UserMixin,db.Model):
         self.password = new_password
         db.session.add(self)
         return True
-
+    
     def can(self,permissions):
-        return self.role is not None and \
-                (self.role.permissions & permissions)==permissions
+        '''
+        确认是否拥有permissions所指定的权限
+        '''
+        return self.role is not None and (self.role.permissions & permissions)==permissions
 
     def is_administrator(self):
         return self.can(Permission.ADMINISTER)
@@ -137,11 +150,18 @@ class User(UserMixin,db.Model):
         db.session.add(self)
 
     def getavatar(self,size=100):
+        '''
+        avatar头像
+        '''
         hash = self.avatar_hash or hashlib.md5(self.email.encode('utf-8')).hexdigest()
         url = url_for('static', filename='avatar/{hash}.jpg'.format(hash=hash))
         return url
+
     @staticmethod
     def generate_fake(count=100):
+        '''
+        生成测试用的条目
+        '''
         from sqlalchemy.exc import IntegrityError
         from random import seed
         import forgery_py
@@ -163,6 +183,7 @@ class User(UserMixin,db.Model):
             except IntegrityError:
                 db.session.rollback()
 
+
 class AnnoymousUser(AnonymousUserMixin):#匿名用户
     def can(self,permissions):
         return False
@@ -170,15 +191,22 @@ class AnnoymousUser(AnonymousUserMixin):#匿名用户
     def is_administrator(self):
         return False
 
+
 class Post(db.Model):
+    '''
+    文章
+    '''
+    #表名
     __tablename__ = 'posts'
+    #定义字段
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.Text)
-    body = db.Column(db.Text)
-    body_html = db.Column(db.Text)
+    body = db.Column(db.Text)#用户输入的原文
+    body_html = db.Column(db.Text)#用户原文经过安全过滤输出的html
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     comments = db.relationship('Comment',backref='post',lazy='dynamic')
+     
     @staticmethod
     def on_changed_body(target,value,oldvalue,initiator):
         allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
@@ -203,13 +231,21 @@ class Post(db.Model):
                     author=u)
             db.session.add(p)
             db.session.commit()
+
+
 class Statue(db.Model):
+    '''
+    个人签名
+    '''
+    #表名
     __tablename__ = 'statues'
+    #定义字段
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.Text)
     body_html = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    
     @staticmethod
     def on_changed_body(target,value,oldvalue,initiator):
         allowed_tags = ['a', 'abbr', 'acronym', 'b', 'code', 'em', 'i',
@@ -234,10 +270,13 @@ class Statue(db.Model):
             db.session.commit()
 
 
-
-
 class Comment(db.Model):
+    '''
+    评论
+    '''
+    #表名
     __tablename__ = 'comments'
+    #定义字段
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.Text)
     body_html = db.Column(db.Text)
@@ -254,14 +293,16 @@ class Comment(db.Model):
             markdown(value, output_format='html'),
             tags=allowed_tags, strip=True))
 
+#当字段有变动时，先调用静态方法预处理
 db.event.listen(Post.body,'set',Post.on_changed_body)
 db.event.listen(Statue.body,'set',Statue.on_changed_body)
 db.event.listen(Comment.body, 'set', Comment.on_changed_body)
 
-
+#匿名用户
 login_manager.anonymous_user = AnnoymousUser
+
+
 #flask-login加载用户的回调函数
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-

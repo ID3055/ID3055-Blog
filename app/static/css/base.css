@@ -1,76 +1,97 @@
 /*页面整体设置*/
-
-html, body {
-    margin: 0;
-    padding: 0;
-    font-size: 12px;
-    font: 12px 'Helvetica Neue',Helvetica,Arial,'Microsoft Yahei','Hiragino Sans GB','Heiti SC','WenQuanYi Micro Hei',sans-serif;
-    background: #fff;
-    color: #222;
-    min-width: 990px;
-    tap-highlight-color: transparent;
-    -webkit-tap-highlight-color: transparent;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  font: 12px 'Helvetica Neue', Helvetica, Arial, 'Microsoft Yahei', 'Hiragino Sans GB', 'Heiti SC', 'WenQuanYi Micro Hei', sans-serif;
+  background: #ffffff;
+  color: #222222;
+  min-width: 990px;
+  tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent;
 }
-article, aside, blockquote, body, button, code, dd, details, div, dl, dt, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, hr, input, legend, li, menu, nav, ol, p, pre, section, td, textarea, th, ul 
-{
-    margin: 0;
-    padding: 0;
+input,
+button,
+select,
+textarea {
+  outline: none;
 }
-a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    vertical-align: baseline;
+textarea {
+  resize: none;
 }
-i, cite, em, var, address, dfn {
-    font-style: italic;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
 }
-div{
-	display: block;
+img {
+  border: none;
+  vertical-align: middle;
 }
-*{
-    margin:0;
-	padding:0;
+a {
+  outline: none;
+  color: #00a1d6;
+  text-decoration: none;
+  cursor: pointer;
 }
-ul{
-    display: block;
-    list-style-type: disc;
-    -webkit-margin-before: 0em;
-    -webkit-margin-after: 0em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
-    -webkit-padding-start: 0px;
+a:hover {
+  color: #f25d8e;
 }
-li{
-    list-style-type:none;
-    display: list-item;
-    text-align: -webkit-match-parent;
+a:focus {
+  -moz-outline-style: none;
 }
-
-a, input {
-    text-decoration: none;
-    outline: none;
+a img {
+  border: none;
+}
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+i,
+th,
+var {
+  font-style: normal;
+  font-weight: normal;
+}
+p,
+span {
+  margin: 0;
+  padding: 0;
+}
+/*清除浮动*/
+.clearfix:after {
+  content: "";
+  display: block;
+  visibility: hidden;
+  height: 0px;
+  clear: both;
+  font-size: 0px;
+}
+#the-IE-tip {
+  background: #00a1d6;
+  text-align: center;
+  padding: 10px 0;
+  color: #fff;
+}
+#the-IE-tip a {
+  display: inline-block;
+  color: #fff;
 }
 *.clearfix {
-    zoom: 1;
-}
-.clearfix:after {
-    content: "";
-    display: block;
-    visibility: hidden;
-    height: 0;
-    clear: both;
-    font-size: 0;
+  zoom: 1;
 }
 
-.clearfix:after {
-    clear: both;
-}
-.clearfix:before, .clearfix:after {
-    content: " ";
-    display: table;
-}
+
 
 .bili-wrapper{
 	margin:0 auto;width:1160px
@@ -649,3 +670,4 @@ a, input {
     overflow: hidden;
     white-space: nowrap;
 }
+

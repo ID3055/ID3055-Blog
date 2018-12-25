@@ -1,21 +1,20 @@
 #coding:utf8
-from flask import render_template, redirect, request, url_for, flash
-from flask_login import login_user, logout_user, login_required, \
-    current_user
+from flask import flash, redirect, render_template, request, url_for
+from flask_login import current_user, login_required, login_user, logout_user
+
 from . import auth
-from ..models import User
-from .forms import LoginForm,RegistrationForm,ChangePasswordForm,\
-    PasswordResetRequestForm,PasswordResetForm
 from .. import db
 from ..email import send_email
+from ..models import User
+from .forms import (ChangePasswordForm, LoginForm, PasswordResetForm,
+                    PasswordResetRequestForm, RegistrationForm)
+
 
 @auth.before_app_request
 def before_request():
     if current_user.is_authenticated:
         current_user.ping()
-        if not current_user.confirmed \
-            and request.endpoint[:5] != 'auth.'\
-            and request.endpoint != 'static':
+        if not current_user.confirmed and request.endpoint[:5] != 'auth.' and request.endpoint != 'static':
             return redirect(url_for('auth.unconfirmed'))
 
 @auth.route('/login',methods=['GET','POST'])
@@ -33,7 +32,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash('You have been logged out.')
+    # flash('You have been logged out.')
     return redirect(url_for('main.index'))
 
 @auth.route('/register',methods=['GET','POST'])

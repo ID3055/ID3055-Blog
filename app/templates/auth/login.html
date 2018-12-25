@@ -1,16 +1,70 @@
 {% extends "layout.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}Flasky - Login{% endblock %}
 
-{% block wrapper %}
-<div class="page-header">
-    <h1>Login</h1>
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/login.css') }}" media="screen,projection" />
+{% endblock %}
+
+{% block navbar %}
+    <div class="bili-header-m">
+        {% include "nav-menu.html" %}
+        {% include "banner-link.html" %}
+    </div>
+{% endblock %}
+
+{% block content %}
+{% for msg in get_flashed_messages() %}
+    <div>
+        {{ msg }}
+    </div>
+{% endfor %}
+<div class="title-line">
+    <span class="tit" style="font-size: 38px;">登录</span>
 </div>
-<div class="col-md-4">
-    {{ wtf.quick_form(form) }}
-    <br>
-    <p>Forgot your password?<a href="{{ url_for('auth.password_reset_request') }}">Click here to reset it</a>.</p>
-    <p>New user? <a href="{{ url_for('auth.register') }}">Click here to register</a>.</p>
+<div class="login-box clearfix">
+    <div class="login-left"></div>
+    <div class="line"></div>
+    <div class="login-right">
+        <div class="form-login">
+            <div class="input-box">
+                <form method='post'>
+                    <ul>
+                        <li>{{ form.csrf_token }}</li>
+                        <li>
+                            <div class="input-container">
+                                {{ form.email(placeholder="用户邮箱") }}
+                                {{ form.email.label }}
+                                <div class="bottom-line"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="input-container">
+                                    {{ form.password(placeholder="密码") }}
+                                    {{ form.password.label }}
+                                    <div class="bottom-line"></div>
+                            </div>
+                        </li>
+                        <li class="remember">
+                            <label>
+                                {{ form.remember_me }}记住我
+                                <span>不是自己的电脑上不要勾选此项</span>
+                                <a target="_blank" href="//passport.bilibili.com/register/findpassword.html#/verify" class="forget-password">忘记密码?</a>
+                                <a target="_blank" href="//www.bilibili.com/blackboard/help.html#%E8%B4%A6%E5%8F%B7%E7%9B%B8%E5%85%B3" class="not-checkout">无法验证?</a>
+                            </label>
+                        </li>
+                        <li>
+                            <div class="btn-box">
+                                {{ form.submit(class_="btn btn-login") }}
+                                <a class="btn btn-reg" href="{{ url_for('auth.register') }}">注册</a>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+                <!-- <p>忘记密码?<a href="{{ url_for('auth.password_reset_request') }}">重置密码</a>.</p> -->
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

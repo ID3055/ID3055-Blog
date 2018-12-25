@@ -11,13 +11,6 @@
 <script src="{{ url_for('static', filename='js/jquery-2.1.4.min.js') }}"></script>
 {% endblock %}
 
-{% block navbar %}
-<div class="bili-header-m">
-    {% include "nav-menu.html" %}
-    {% include "banner-link.html" %}
-    {% include "primary-menu.html" %}
-</div>
-{% endblock %}
 {% block content %}
     <div class="bili-wrapper">
         {% block wrapper %}

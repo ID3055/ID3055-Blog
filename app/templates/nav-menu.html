@@ -1,0 +1,55 @@
+<div class="nav-menu">
+    <div class="nav-menu">
+        <div class="blur-bg" style="background-image: url('{{ url_for('static',filename='1.jpg') }}');"></div>
+        <div class="nav-mask"></div>
+        <div class="bili-wrapper clearfix">
+            <div class="nav-con fl">
+                <ul>
+                    <li class="nav-item home"><a href="" title="主站" class="t"><i class="bili-icon"></i>主站</a>	</li> 
+                    <li class="nav-item hbili">	<a href="" target="_blank" title="" class="t">标题2</a></li> 
+                    <li class="nav-item game"><a href="" target="_blank" title="" class="t">标题3</a></li> 
+                    <li class="nav-item live"><a href="" target="_blank" title="" class="t">标题4</a></li> 
+                    <li class="nav-item buy"><a href="" target="_blank" title="" class="t">标题5</a></li> 
+                    <li class="nav-item zb"><a href="" target="_blank" title="" class="t">标题6</a></li> 
+                    <li class="nav-item mobile"><a href="" target="_blank" title="" class="t">标题7</a></li>
+                </ul>
+            </div>
+            <div class="nav-con fr">
+                <ul class="fr">
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item profile-info">
+                        <a href="{{ url_for('main.user', username=current_user.username) }}" target="_blank" class="t">
+                            <div class="i-face">
+                                <img src="{{ url_for('static', filename='tou2.jpg') }}" class="face" /> 
+                                <img class="pendant" /> <!---->
+                            </div>
+                        </a>
+                        <!--隐藏的详情页面-->
+                        <div class="profile-m dd-bubble">
+                            <div class="u-info">
+                                <div class="uname"><b class="">满塘都是我的鱼</b> <!----></div>
+                                <div class="i_menu">
+                                    <a href="{{ url_for('auth.change_password') }}">Change Password</a>
+                                    <a href="{{ url_for('auth.logout') }}">Log Out</a>
+                                    {% if current_user.can(Permission.MODERATE_COMMENTS) %}
+                                    <a href="{{ url_for('main.moderate') }}">Moderate Comments</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </li> 
+                    <li class="nav-item"><a href="" target="_blank" title="消息" class="t"><div class="num">3</div>消息</a><!----></li> 
+                    <li class="nav-item"><a href="" class="t"><div class="num">4</div>动态</a> <!----></li> 
+                    <li class="nav-item"><a href="" target="_blank" class="t">稍后再看</a> <!----></li> 
+                    <li class="nav-item"><a href="" target="_blank" class="t">收藏夹</a> <!----></li> 
+                    <li class="nav-item"><a href="" target="_blank" class="t">历史</a> <!----></li>
+                    {% else %}
+                    <li class="nav-item"><a class="t" href="{{ url_for('auth.login') }}">登陆</a></li>
+                    {% endif %}
+                </ul> <!---->
+            </div>
+        </div>
+    
+
+    </div>
+</div>
