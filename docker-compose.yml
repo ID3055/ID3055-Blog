@@ -1,15 +1,4 @@
-version: '2'
+version: '3'
 services:
-  pgsql_server:
-    image: postgres:9.3
-    hostname: pgsql_server
-    container_name: pgsql_server
-    volumes:
-      - "$PWD/database/main:/var/lib/postgresql/data"
-      - "$PWD/database/my-postgres.conf:/etc/postgresql/postgresql.conf"
-      - "/etc/localtime:/etc/localtime:ro"
-    environment:
-      - POSTGRES_PASSWORD=VrpP&*#)@1#
-    ports:
-      - "5432:5432"
-    restart: always
+  web:
+    build: ./
