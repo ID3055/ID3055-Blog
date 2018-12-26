@@ -5,7 +5,8 @@ __pycache__/
 .pyc
 # C extensions
 *.so
-
+#docker
+*.swp
 # Distribution / packaging
 data-dev.sqlite
 .sqlite
