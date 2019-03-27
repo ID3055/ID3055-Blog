@@ -50,8 +50,8 @@
                             <label>
                                 {{ form.remember_me }}记住我
                                 <span>不是自己的电脑上不要勾选此项</span>
-                                <a target="_blank" href="//passport.bilibili.com/register/findpassword.html#/verify" class="forget-password">忘记密码?</a>
-                                <a target="_blank" href="//www.bilibili.com/blackboard/help.html#%E8%B4%A6%E5%8F%B7%E7%9B%B8%E5%85%B3" class="not-checkout">无法验证?</a>
+                                <a target="_blank" href="{{ url_for('auth.password_reset_request') }}" class="forget-password">忘记密码?</a>
+                                <!-- <a target="_blank" href="{{ url_for('auth.password_reset_request') }}" class="not-checkout">无法验证?</a> -->
                             </label>
                         </li>
                         <li>
