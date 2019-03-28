@@ -9,6 +9,7 @@ from flask_script import Manager, Shell
 from app import create_app, db
 from app.models import Post, Role, User
 
+#init app, select config type
 app = create_app(config_name=os.getenv('FLASK_CONFIG') or 'default')
 
 manager = Manager(app)
