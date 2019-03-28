@@ -12,6 +12,14 @@
 
 pip install -r requirements.txt
 
+
+### 调试与部署
+
+* 调试时使用外部环境
+* 部署时使用docker环境，通过docker-compose up -d启动会自动开启nginx服务
+* virtualenv --no-site-packages venv
+* pip3 install -r re.txt
+
 ### 启动前需要做的事
 
 * 在app/config.py中配置数据库
@@ -26,6 +34,6 @@ pip install -r requirements.txt
 
 ### Test Command
 
-* python manage.py runserver
+* python manage.py runserver --host=0.0.0.0 --port=80
 
 ### 
