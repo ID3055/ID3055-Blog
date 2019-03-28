@@ -30,6 +30,7 @@ class Role(db.Model):
     #定义列
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), unique=True)
+    # 如果role的default为True，用户注册时会默认选这一种role
     default = db.Column(db.Boolean,default=False,index=True)
     permissions = db.Column(db.Integer)
     users = db.relationship('User', backref='role', lazy='dynamic')
@@ -44,9 +45,9 @@ class Role(db.Model):
                 Permission.COMMENT|
                 Permission.WRITE_ARTICLES,True),
         'Moderateor':(Permission.FOLLOW|
-                        Permission.COMMENT|
-                        Permission.WRITE_ARTICLES|
-                        Permission.MODERATE_COMMENTS,False),
+                      Permission.COMMENT|
+                      Permission.WRITE_ARTICLES|
+                      Permission.MODERATE_COMMENTS,False),
         'Administrator':(0xff,False)
         }
         for r in roles:
@@ -66,6 +67,7 @@ class User(UserMixin,db.Model):
     username = db.Column(db.String(64), unique=True, index=True)
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     password_hash = db.Column(db.String(128))
+    #是否已经通过邮件验证
     confirmed = db.Column(db.Boolean, default=False)
 
     name = db.Column(db.String(64))

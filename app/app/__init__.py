@@ -50,4 +50,7 @@ def create_app(config_name):
     # from .spider import spider as spider_blueprint
     # app.register_blueprint(spider_blueprint,url_prefix='/spider')
 
+    from .manage import manage as manage_blueprint
+    app.register_blueprint(manage_blueprint,url_prefix='/manage')
+
     return app

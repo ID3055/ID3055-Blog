@@ -25,12 +25,17 @@ pip install -r requirements.txt
 * 在app/config.py中配置数据库
 
 
+
+
 ### 数据库初始化方法
 
-* python3.7 manage.py db init
-* python3.7 manage.py db migrate -m  "initial migration"
-* python3.7 manage.py db upgrade
+* python3 manage.py db init
+* python3 manage.py db migrate -m  "initial migration"
+* python3 manage.py db upgrade
 
+* 初始化role表
+* python3 manage.py shell
+>>>>Role.insert_roles()
 
 ### Test Command
 
