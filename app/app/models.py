@@ -158,6 +158,25 @@ class User(UserMixin,db.Model):
         hash = self.avatar_hash or hashlib.md5(self.email.encode('utf-8')).hexdigest()
         url = url_for('static', filename='avatar/{hash}.jpg'.format(hash=hash))
         return url
+    
+    def generate_auth_token(self, expiration):
+        '''
+        生成api token
+        '''
+        s = Serializer(current_app.config['SECRET_KEY'], expires_in=expiration)
+        return s.dumps({'id': self.id}).decode('utf-8')
+
+    @staticmethod
+    def verify_auth_token(token):
+        '''
+        验证token
+        '''
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            data = s.loads(token)
+        except:
+            return None
+        return User.query.get(data['id'])
 
     @staticmethod
     def generate_fake(count=100):
@@ -295,7 +314,7 @@ class Comment(db.Model):
             markdown(value, output_format='html'),
             tags=allowed_tags, strip=True))
 
-#当字段有变动时，先调用静态方法预处理
+#当字段内容有变动时，先调用静态方法预处理
 db.event.listen(Post.body,'set',Post.on_changed_body)
 db.event.listen(Statue.body,'set',Statue.on_changed_body)
 db.event.listen(Comment.body, 'set', Comment.on_changed_body)
