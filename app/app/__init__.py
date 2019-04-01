@@ -18,6 +18,7 @@ pagedown = PageDown()
 
 login_manager = LoginManager()
 login_manager.session_protection = 'string'
+
 # 需要注册时跳转的view
 login_manager.login_view = 'auth.login'
 
