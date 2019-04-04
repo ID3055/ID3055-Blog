@@ -104,6 +104,9 @@ class User(UserMixin,db.Model):
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
+    @staticmethod
+    def verify_user_exists(email):
+        return User.query.filter_by(email=email).first() is not None
 
     def generate_confirmation_token(self, expiration=3600):
         # 将{'confirm': self.id}加密生成token

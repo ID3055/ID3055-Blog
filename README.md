@@ -1,10 +1,15 @@
 ##ID3055'blog
+[![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
+[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 ### Authors
 * [ID3055](https://github.com/ID3055)
 
 ### TODO
 
-* 
+* 设计api，满足前后端分离的需求
+* 表单验证怎么做，前后端均做校验吗
+* csrf机制如何实现
+* api中涉及到的各种异常到底怎么处理
 
 ### requirements
 
