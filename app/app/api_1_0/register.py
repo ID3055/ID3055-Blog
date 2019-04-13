@@ -12,12 +12,10 @@ from .errors import forbidden, unauthorized, bad_request
 
 
 @api.route('/register', methods=['POST'])
-# @auth.login_required
-# @confirmed_required
 def get_comment():
     if User.verify_user_exists(request.form.get('email')):
         return bad_request("this email is already exists")
-    if User.verify_user_exists(request.form.get('username')):
+    if User.verify_username_exists(request.form.get('username')):
         return bad_request("this username is already exists")
     try:
         user = User(email=request.form.get('email'),
@@ -30,8 +28,5 @@ def get_comment():
         db.session.commit()
     except Exception as e:
         db.session.rollback()
-        print(123)
         raise(e)
-        
-
     return jsonify({"status": "success"})

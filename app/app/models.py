@@ -108,6 +108,9 @@ class User(UserMixin,db.Model):
     def verify_user_exists(email):
         return User.query.filter_by(email=email).first() is not None
 
+    def verify_username_exists(username):
+        return User.query.filter_by(username=username).first() is not None
+
     def generate_confirmation_token(self, expiration=3600):
         # 将{'confirm': self.id}加密生成token
         s = Serializer(current_app.config['SECRET_KEY'], expiration)
